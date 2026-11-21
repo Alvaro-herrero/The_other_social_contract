@@ -90,6 +90,27 @@ Input overrides are available through `--eurobarometer`, `--latin-america`,
 `--vdem`, and `--ppp`. Run with `--help` to see their defaults. Test images can be
 written to a temporary directory and removed after inspection.
 
+## Data sources and acknowledgements
+
+This project gratefully acknowledges the organisations and survey participants
+whose work makes the analysis possible:
+
+- [Eurobarometer](https://europa.eu/eurobarometer/): the original European survey
+  responses on satisfaction with democracy used in the harmonised dataset.
+- [Latinobarómetro](https://www.latinobarometro.org/): the Latin American survey
+  data on satisfaction with democracy used in the country/year workbook.
+- [World Bank — World Development Indicators](https://data.worldbank.org/indicator/NE.CON.PCAP.PP.KD):
+  PPP-adjusted consumption per capita, indicator `NE.CON.PCAP.PP.KD`, expressed
+  in constant 2021 international dollars.
+- [V-Dem Institute — Varieties of Democracy](https://www.v-dem.net/data/the-v-dem-dataset/):
+  the Country-Year Core v16 dataset and electoral democracy index
+  (`v2x_polyarchy`). Dataset citation: Coppedge et al. (2026),
+  [V-Dem [Country-Year/Country-Date] Dataset v16](https://doi.org/10.23696/vdemds26).
+
+Please consult these providers' documentation for their original methods and
+dataset citation guidance. Input datasets are kept locally and are excluded
+from this repository.
+
 ## Git tracking
 
 Only `correlation.py`, `README.md`, `requirements.txt`, and `.gitignore` are
