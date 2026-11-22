@@ -249,7 +249,7 @@ def prepare_analysis(eurobarometer, latin_america, vdem, ppp):
     return panel, changes, analyze(changes), audit
 
 
-def make_graph(changes, results, output_path, audit):
+def make_graph(changes, results, output_path):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -263,9 +263,9 @@ def make_graph(changes, results, output_path, audit):
     number = lambda value: f"{value:.3f}" if np.isfinite(value) else "n/a"
     with plt.rc_context({"font.size": 10, "axes.spines.top": False,
                          "axes.spines.right": False, "savefig.facecolor": "white"}):
-        fig, axes = plt.subplots(1, 2, figsize=(14, 6.5), sharex=True)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 8), sharex=True)
         try:
-            fig.subplots_adjust(left=.075, right=.98, bottom=.27, top=.77, wspace=.30)
+            fig.subplots_adjust(left=.075, right=.98, bottom=.12, top=.80, wspace=.30)
             for ax, value in zip(axes, VALUES[1:]):
                 complete = comparison_data(changes, value)
                 stats = results.loc[results.comparison.eq(value)].iloc[0]
@@ -289,20 +289,13 @@ def make_graph(changes, results, output_path, audit):
                 if value == "ppp_consumption":
                     ax.yaxis.set_major_formatter(StrMethodFormatter("{x:,.0f}"))
             fig.suptitle("Correlation", fontsize=18, y=.97)
-            fig.text(.5, .90, "2005-2010  |  2010-2015  |  2015-2020", ha="center", fontsize=11)
+            fig.text(.5, .915, "2005-2010  |  2010-2015  |  2015-2020", ha="center", fontsize=11)
             handles = [Line2D([], [], marker="o", color="#356d9a", linestyle="none",
                               label="Observed endpoints"),
                        Line2D([], [], marker="D", color="#c77725", linestyle="none",
                               label="At least one estimated endpoint")]
-            fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.5, .12),
+            fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.5, .015),
                        ncol=2, frameon=False)
-            fig.text(.5, .095, "Each point is later minus earlier in the same country; changes are not annualized.",
-                     ha="center", fontsize=9)
-            fig.text(.5, .065, "Missing points: interpolation between observations; linear extrapolation at the ends, within valid bounds.",
-                     ha="center", fontsize=9)
-            if audit["ppp_unavailable"]:
-                fig.text(.5, .032, "PPP comparison excludes series without observations: "
-                         + ", ".join(audit["ppp_unavailable"]) + ".", ha="center", fontsize=9)
             output_path = Path(output_path)
             output_path.parent.mkdir(parents=True, exist_ok=True)
             fig.savefig(output_path, dpi=200, format="jpeg", pil_kwargs={"quality": 95})
@@ -339,7 +332,7 @@ def main(argv=None):
             args.eurobarometer, args.latin_america, args.vdem, args.ppp)
         print_report(panel, changes, results, audit)
         if not args.dry_run:
-            make_graph(changes, results, args.output, audit)
+            make_graph(changes, results, args.output)
             print(f"Saved {args.output.resolve()}")
     except (OSError, ValueError, ImportError, BadZipFile) as error:
         parser.error(str(error))
