@@ -1,7 +1,10 @@
-# Track only the reviewed source and documentation below.
-# Everything else, including data/, output/, and virtual environments, stays local.
+# Track only the reviewed source, documentation, and final JPG below.
+# Everything else, including data/ and virtual environments, stays local.
 /*
 !/.gitignore
 !/correlation.py
 !/README.md
 !/requirements.txt
+!/output/
+/output/*
+!/output/correlation.jpg

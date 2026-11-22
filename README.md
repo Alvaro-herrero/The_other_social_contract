@@ -14,6 +14,8 @@ The script writes one image, `output/correlation.jpg`, with two panels:
 - Changes in V-Dem electoral democracy against changes in satisfaction.
 - Changes in PPP consumption per capita against changes in satisfaction.
 
+![Five-year change correlations](output/correlation.jpg)
+
 Satisfaction changes are on the horizontal axis in both panels. Each point is
 one country's later value minus its earlier value over 2005–2010, 2010–2015, or
 2015–2020. Changes are in the original units, without annualization. Each panel
@@ -113,8 +115,9 @@ from this repository.
 
 ## Git tracking
 
-Only `correlation.py`, `README.md`, `requirements.txt`, and `.gitignore` are
-allowed into Git. Input datasets in `data/`, generated files in `output/`, virtual
-environments, and all other files are ignored and must stay local. Supply the
-datasets locally before running the script. To track another source file, first
-add its exact path to the allowlist in `.gitignore`.
+Only `correlation.py`, `README.md`, `requirements.txt`, `.gitignore`, and the
+final image `output/correlation.jpg` are allowed into Git. Input datasets in
+`data/`, other generated files in `output/`, virtual environments, and all other
+files are ignored and must stay local. Supply the datasets locally before
+running the script. To track another file, first add its exact path to the
+allowlist in `.gitignore`.
